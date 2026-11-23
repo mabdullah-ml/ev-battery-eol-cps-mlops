@@ -1,0 +1,16 @@
+services:
+  timescaledb:
+    image: timescale/timescaledb:latest-pg16
+    environment:
+      POSTGRES_USER: cps_user
+      POSTGRES_PASSWORD: cps_password
+      POSTGRES_DB: ev_telemetry
+    ports:
+      - "5432:5432"
+
+  eol-inference-api:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - timescaledb

@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=69.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ev-battery-eol-cps-mlops"
+version = "1.0.0"
+description = "Cyber-Physical System (CPS) IoT telemetry pipeline and EV battery End-of-Life (RUL) prediction with PyTorch, MLflow, FastAPI, and TimescaleDB."
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi>=0.115.0,<1.0.0",
+  "pydantic>=2.9.0,<3.0.0",
+  "uvicorn[standard]>=0.32.0,<1.0.0",
+]
+
+[project.optional-dependencies]
+ml = [
+  "torch>=2.4.0",
+  "mlflow>=2.16.0",
+]
+dev = [
+  "pytest>=8.3.0,<9.0.0",
+  "ruff>=0.7.0,<1.0.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 115
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
